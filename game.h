@@ -5,8 +5,9 @@ class Game {
 
     private:
         // Initialization
-        const int screenWidth = 800;
-        const int screenHeight = 450;
+        const int screenWidth = 1000;
+        const int screenHeight = 480;
+        struct Color bgColor;
 
         void initVariables();
         void initWindow();
@@ -15,6 +16,9 @@ class Game {
         // Constructors
         Game();
         virtual ~Game();
+
+        //Accessors
+        const bool isRunning() const;
 
         void pollEvents();
         void update();

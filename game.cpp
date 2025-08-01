@@ -5,11 +5,13 @@ void Game::initVariables()
 {
     // Initialization
     // TODO: Load resources / Initialize variables at this point
+    bgColor = (Color){147,211,196,255};
 }
 
 void Game::initWindow()
 {
-    InitWindow(screenWidth, screenHeight, "raylib [<module>] example - <name>");
+    InitWindow(screenWidth, screenHeight, "Sprout Lands");
+    SetExitKey(0);
     SetTargetFPS(60);
 }
 
@@ -24,6 +26,11 @@ Game::~Game()
     CloseWindow();
 }
 
+const bool Game::isRunning() const
+{
+    return !WindowShouldClose();
+}
+
 void Game::pollEvents()
 {
     //TODO: Handle input events:
@@ -34,8 +41,7 @@ void Game::render()
     BeginDrawing();
 
     // TODO: Draw everything that requires to be drawn at this point:
-    ClearBackground(RAYWHITE);
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+    ClearBackground(bgColor);
 
     EndDrawing();
 }
@@ -46,7 +52,7 @@ void Game::update()
 }
 
 void Game::run() {
-    while (!WindowShouldClose()) {
+    while (isRunning()) {
         pollEvents();
         update();
         render();
