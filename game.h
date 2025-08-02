@@ -8,7 +8,10 @@ class Game {
         const int screenWidth = 1000;
         const int screenHeight = 480;
         Color bgColor;
-        Texture grassSprite;
+        Texture2D grassSprite;
+        Texture2D playerSprite;
+        Rectangle playerSrc;
+        Rectangle playerDest;
 
         void initVariables();
         void initWindow();

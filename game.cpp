@@ -1,10 +1,14 @@
 #include "game.h"
+#include <raylib.h>
 
 void Game::initVariables()
 {
     // Initialization
     // TODO: Load resources / Initialize variables at this point
     grassSprite = LoadTexture("assets/Tilesets/Grass.png");
+    playerSprite = LoadTexture("assets/Characters/CharacterSpriteSheet.png");
+    playerSrc = Rectangle{0, 0, 48, 48};
+    playerDest = Rectangle{200, 200, 100, 100};
     bgColor = (Color){147,211,196,255};
 }
 
@@ -23,6 +27,8 @@ Game::Game()
 
 Game::~Game()
 {
+    UnloadTexture(grassSprite);
+    UnloadTexture(playerSprite);
     CloseWindow();
 }
 
@@ -42,6 +48,7 @@ void Game::render()
 
     // TODO: Draw everything that requires to be drawn at this point:
     DrawTexture(grassSprite, 100, 50, RAYWHITE);
+    DrawTexturePro(playerSprite, playerSrc, playerDest, Vector2{playerDest.width, playerSrc.height}, 0, RAYWHITE);
     ClearBackground(bgColor);
 
     EndDrawing();
