@@ -16,6 +16,10 @@ class Game {
         Rectangle playerDest;
         float playerSpeed;
 
+        //Music
+        Music music;
+        bool musicPaused;
+
         void initVariables();
         void initWindow();
 

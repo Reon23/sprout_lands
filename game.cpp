@@ -15,6 +15,12 @@ void Game::initVariables()
     playerSrc = Rectangle{0, 0, 48, 48};
     playerDest = Rectangle{200, 200, 100, 100};
     playerSpeed = 5;
+
+    //Music
+    InitAudioDevice();
+    music = LoadMusicStream("assets/audio/ChillMuzic.mp3");
+    musicPaused = false;
+    PlayMusicStream(music);
 }
 
 void Game::initWindow()
@@ -34,6 +40,8 @@ Game::~Game()
 {
     UnloadTexture(grassSprite);
     UnloadTexture(playerSprite);
+    UnloadMusicStream(music);
+    CloseAudioDevice();
     CloseWindow();
 }
 
@@ -45,6 +53,8 @@ const bool Game::isRunning() const
 void Game::pollEvents()
 {
     //TODO: Handle input events:
+    //
+    // Player Movement
     if (IsKeyDown(KEY_W)) {
         playerDest.y -= playerSpeed;
     }
@@ -57,6 +67,9 @@ void Game::pollEvents()
     if (IsKeyDown(KEY_D)) {
         playerDest.x += playerSpeed;
     }
+
+    //Music Control
+    if (IsKeyDown(KEY_M)) musicPaused = !musicPaused;
 }
 
 void Game::render()
@@ -74,6 +87,11 @@ void Game::render()
 void Game::update()
 {
     // TODO: Update variables :
+    //
+    // Music Stream
+    UpdateMusicStream(music);
+    if (musicPaused) PauseMusicStream(music);
+    else ResumeMusicStream(music);
 }
 
 void Game::run() {
