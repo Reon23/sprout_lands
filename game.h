@@ -9,15 +9,18 @@ class Game {
         const int screenHeight = 480;
         Color bgColor;
         Texture2D grassSprite;
+
+        //Player
         Texture2D playerSprite;
         Rectangle playerSrc;
         Rectangle playerDest;
+        float playerSpeed;
 
         void initVariables();
         void initWindow();
 
     public:
-        // Constructors
+        // Constructor & Destructor
         Game();
         virtual ~Game();
 
