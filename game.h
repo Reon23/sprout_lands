@@ -20,6 +20,9 @@ class Game {
         Music music;
         bool musicPaused;
 
+        //Camera
+        Camera2D camera;
+
         void initVariables();
         void initWindow();
 

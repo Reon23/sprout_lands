@@ -21,6 +21,12 @@ void Game::initVariables()
     music = LoadMusicStream("assets/audio/ChillMuzic.mp3");
     musicPaused = false;
     PlayMusicStream(music);
+
+    //Camera
+    camera = Camera2D{
+        Vector2{screenWidth/2.f, screenHeight/2.f}, 
+        Vector2{playerDest.x - playerDest.width/2.f, playerDest.y - playerDest.height/2.f}, 
+        0.0, 1.0};
 }
 
 void Game::initWindow()
@@ -70,17 +76,22 @@ void Game::pollEvents()
 
     //Music Control
     if (IsKeyDown(KEY_M)) musicPaused = !musicPaused;
+
+    // Camera Position
+    camera.target = Vector2{playerDest.x - playerDest.width/2.f, playerDest.y - playerDest.height/2.f};
 }
 
 void Game::render()
 {
     BeginDrawing();
+    ClearBackground(bgColor);
+    BeginMode2D(camera);
 
     // TODO: Draw everything that requires to be drawn at this point:
     DrawTexture(grassSprite, 100, 50, RAYWHITE);
     DrawTexturePro(playerSprite, playerSrc, playerDest, Vector2{playerDest.width, playerSrc.height}, 0, RAYWHITE);
-    ClearBackground(bgColor);
 
+    EndMode2D();
     EndDrawing();
 }
 
