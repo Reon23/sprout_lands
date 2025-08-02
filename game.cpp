@@ -1,10 +1,10 @@
 #include "game.h"
-#include <raylib.h>
 
 void Game::initVariables()
 {
     // Initialization
     // TODO: Load resources / Initialize variables at this point
+    grassSprite = LoadTexture("assets/Tilesets/Grass.png");
     bgColor = (Color){147,211,196,255};
 }
 
@@ -17,8 +17,8 @@ void Game::initWindow()
 
 Game::Game()
 {
-    initVariables();
     initWindow();
+    initVariables();
 }
 
 Game::~Game()
@@ -41,6 +41,7 @@ void Game::render()
     BeginDrawing();
 
     // TODO: Draw everything that requires to be drawn at this point:
+    DrawTexture(grassSprite, 100, 50, RAYWHITE);
     ClearBackground(bgColor);
 
     EndDrawing();

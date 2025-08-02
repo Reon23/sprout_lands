@@ -7,7 +7,8 @@ class Game {
         // Initialization
         const int screenWidth = 1000;
         const int screenHeight = 480;
-        struct Color bgColor;
+        Color bgColor;
+        Texture grassSprite;
 
         void initVariables();
         void initWindow();
