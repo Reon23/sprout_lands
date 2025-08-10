@@ -16,6 +16,18 @@ class Game {
         Rectangle playerDest;
         float playerSpeed;
 
+        //Player Movement
+        bool playerMoving;
+        bool playerUp;
+        bool playerDown;
+        bool playerLeft;
+        bool playerRight;
+
+        //Frame Count
+        int playerDir;
+        int playerFrame;
+        int frameCount;
+
         //Music
         Music music;
         bool musicPaused;

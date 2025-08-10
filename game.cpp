@@ -1,5 +1,4 @@
 #include "game.h"
-#include <raylib.h>
 
 void Game::initVariables()
 {
@@ -62,20 +61,28 @@ void Game::pollEvents()
     //
     // Player Movement
     if (IsKeyDown(KEY_W)) {
-        playerDest.y -= playerSpeed;
+        playerMoving = true;
+        playerDir = 1;
+        playerUp = true;
     }
     if (IsKeyDown(KEY_S)) {
-        playerDest.y += playerSpeed;
+        playerMoving = true;
+        playerDir = 0;
+        playerDown = true;
     }
     if (IsKeyDown(KEY_A)) {
-        playerDest.x -= playerSpeed;
+        playerMoving = true;
+        playerDir = 2;
+        playerLeft = true;
     }
     if (IsKeyDown(KEY_D)) {
-        playerDest.x += playerSpeed;
+        playerMoving = true;
+        playerDir = 3;
+        playerRight = true;
     }
 
     //Music Control
-    if (IsKeyDown(KEY_M)) musicPaused = !musicPaused;
+    if (IsKeyPressed(KEY_M)) musicPaused = !musicPaused;
 
     // Camera Position
     camera.target = Vector2{playerDest.x - playerDest.width/2.f, playerDest.y - playerDest.height/2.f};
@@ -99,10 +106,43 @@ void Game::update()
 {
     // TODO: Update variables :
     //
+    // Player Movement
+    
+    if (playerMoving) {
+        if (playerUp) {
+            playerDest.y -= playerSpeed;
+        }
+        if (playerDown) {
+            playerDest.y += playerSpeed;
+        }
+        if (playerLeft) {
+            playerDest.x -= playerSpeed;
+        }
+        if (playerRight) {
+            playerDest.x += playerSpeed;
+        }
+        if (frameCount % 8 == 1) playerFrame++;
+        playerSrc.x = playerSrc.width * playerFrame;
+    }
+    else playerSrc.x = 0;
+
+    // Player Animation
+    frameCount++;
+    if (playerFrame > 3) playerFrame = 0;
+    playerSrc.y = playerSrc.height * playerDir;
+
+
     // Music Stream
     UpdateMusicStream(music);
     if (musicPaused) PauseMusicStream(music);
     else ResumeMusicStream(music);
+
+    // Player Movement
+    playerMoving = false;
+    playerUp = false;
+    playerDown = false;
+    playerLeft = false;
+    playerRight = false;
 }
 
 void Game::run() {
