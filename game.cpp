@@ -107,7 +107,6 @@ void Game::update()
     // TODO: Update variables :
     //
     // Player Movement
-    
     if (playerMoving) {
         if (playerUp) {
             playerDest.y -= playerSpeed;
@@ -122,13 +121,16 @@ void Game::update()
             playerDest.x += playerSpeed;
         }
         if (frameCount % 8 == 1) playerFrame++;
-        playerSrc.x = playerSrc.width * playerFrame;
     }
-    else playerSrc.x = 0;
+    else if (frameCount % 45 == 1) {
+        playerFrame++;
+    }
 
     // Player Animation
     frameCount++;
     if (playerFrame > 3) playerFrame = 0;
+    if (!playerMoving && playerFrame > 1) playerFrame = 0;
+    playerSrc.x = playerSrc.width * playerFrame;
     playerSrc.y = playerSrc.height * playerDir;
 
 
