@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "player.h"
 
 class Game {
 
@@ -10,30 +11,15 @@ class Game {
         Color bgColor;
         Texture2D grassSprite;
 
-        //Player
-        Texture2D playerSprite;
-        Rectangle playerSrc;
-        Rectangle playerDest;
-        float playerSpeed;
-
-        //Player Movement
-        bool playerMoving;
-        bool playerUp;
-        bool playerDown;
-        bool playerLeft;
-        bool playerRight;
-
-        //Frame Count
-        int playerDir;
-        int playerFrame;
-        int frameCount;
-
         //Music
         Music music;
         bool musicPaused;
 
         //Camera
         Camera2D camera;
+
+        // Player
+        Player* player;
 
         void initVariables();
         void initWindow();
